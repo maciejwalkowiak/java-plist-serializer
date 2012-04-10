@@ -79,11 +79,10 @@ Post post = new Post(new Author("jason bourne"), "java-plist-serializer introduc
 post.addComment(new Comment("maciejwalkowiak", "first comment"));
 post.addComment(new Comment("john doe", "second comment"));
 
-
 String xml = plistSerializer.serialize(post);
 ```
 
-<code>xml</code> will contain:
+<code>xml</code> will contain unformatted version of:
 
 ```
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -115,6 +114,28 @@ String xml = plistSerializer.serialize(post);
 		<integer>9</integer>
 	</dict>
 </plist>
+```
+
+### Spring Integration
+
+It is possible to use PlistSerializer together with Spring MVC. To return property lists in a response of calling some Spring Controller you can use <code>pl.maciejwalkowiak.plist.spring.PlistView</code>.
+
+There are several ways to configure Spring MVC. The easiest to understand example of usage of <code>PlistView</code>:
+
+```
+@RequestMapping(value = "/loadBlogPost", method = RequestMethod.GET)
+public ModelAndView loadBlogPost() {
+
+		Post post = new Post(new Author("jason bourne"), "java-plist-serializer introduction", 9);
+		post.addComment(new Comment("maciejwalkowiak", "first comment"));
+		post.addComment(new Comment("john doe", "second comment"));
+
+		ModelMap model = new ModelMap();
+
+		model.addAttribute("RESULT", notification);
+
+		return new ModelAndView(new PlistView(), model);
+}
 ```
 
 ### Known issues
