@@ -39,6 +39,86 @@ There are few ways to customize XML output:
 * you can choose or define your own key naming strategy. Currently keys can be created with exactly the same name as field by using <code>DefaultNamingStrategy</code>
 or fields can be changed to uppercase using <code>UppercaseNamingStrategy</code>. You can implement your own naming policy by implementing <code>pl.maciejwalkowiak.plist.NamingStrategy</code> and registering it by <code>PlistSerializerImpl</code> constructor argument
 
+### Example
+
+We have classes:
+
+<code>
+public class Post {
+	private String title;
+	private Integer views = 0;
+	private List<Comment> comments = new ArrayList<Comment>();
+	private Author author;
+
+	public Post(Author author, String title, Integer views) {
+		this.title = title;
+		this.views = views;
+		this.author = author;
+	}
+}
+
+public class Comment {
+	private String content;
+	private String author;
+
+	public Comment(String author, String content) {
+		this.content = content;
+		this.author = author;
+	}
+}
+
+public class Author {
+	private String name;
+}
+</code>
+
+And execute code:
+<code>
+Post post = new Post(new Author("jason bourne"), "java-plist-serializer introduction", 9);
+post.addComment(new Comment("maciejwalkowiak", "first comment"));
+post.addComment(new Comment("john doe", "second comment"));
+
+
+String xml = plistSerializer.serialize(post);
+</code>
+
+<code>xml</code> will contain:
+<code>
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>author</key>
+		<dict>
+			<key>name</key>
+			<string>jason bourne</string>
+		</dict>
+		<key>comments</key>
+		<array>
+			<dict>
+				<key>author</key>
+				<string>maciejwalkowiak</string>
+				<key>content</key>
+				<string>first comment</string>
+			</dict>
+			<dict>
+				<key>author</key>
+				<string>john doe</string>
+				<key>content</key>
+				<string>second comment</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>java-plist-serializer introduction</string>
+		<key>views</key>
+		<integer>9</integer>
+	</dict>
+</plist>
+</code>
+
+
+
+</code>
+
 ### Known issues
 
 If you have cycle dependency in serialized object tree you will get StackOverFlowError unless you ignore reference by annotating with <code>@PlistIgnore</code>
