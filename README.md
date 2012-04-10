@@ -73,6 +73,7 @@ public class Author {
 ```
 
 And execute code:
+
 ```
 Post post = new Post(new Author("jason bourne"), "java-plist-serializer introduction", 9);
 post.addComment(new Comment("maciejwalkowiak", "first comment"));
