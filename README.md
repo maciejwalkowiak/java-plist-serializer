@@ -125,13 +125,11 @@ There are several ways to configure Spring MVC. The easiest to understand exampl
 ```
 @RequestMapping(value = "/loadBlogPost", method = RequestMethod.GET)
 public ModelAndView loadBlogPost() {
-
 		Post post = new Post(new Author("jason bourne"), "java-plist-serializer introduction", 9);
 		post.addComment(new Comment("maciejwalkowiak", "first comment"));
 		post.addComment(new Comment("john doe", "second comment"));
 
 		ModelMap model = new ModelMap();
-
 		model.addAttribute("RESULT", notification);
 
 		return new ModelAndView(new PlistView(), model);
