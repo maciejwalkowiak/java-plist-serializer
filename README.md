@@ -43,7 +43,7 @@ or fields can be changed to uppercase using <code>UppercaseNamingStrategy</code>
 
 We have classes:
 
-<code>
+```java
 public class Post {
 	private String title;
 	private Integer views = 0;
@@ -70,20 +70,20 @@ public class Comment {
 public class Author {
 	private String name;
 }
-</code>
+```
 
 And execute code:
-<code>
+```java
 Post post = new Post(new Author("jason bourne"), "java-plist-serializer introduction", 9);
 post.addComment(new Comment("maciejwalkowiak", "first comment"));
 post.addComment(new Comment("john doe", "second comment"));
 
 
 String xml = plistSerializer.serialize(post);
-</code>
+```
 
 <code>xml</code> will contain:
-<code>
+```xml
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
@@ -113,7 +113,7 @@ String xml = plistSerializer.serialize(post);
 		<integer>9</integer>
 	</dict>
 </plist>
-</code>
+```
 
 ### Known issues
 
