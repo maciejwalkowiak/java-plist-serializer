@@ -43,7 +43,7 @@ or fields can be changed to uppercase using <code>UppercaseNamingStrategy</code>
 
 We have classes:
 
-<code>
+'''java
 public class Post {
 	private String title;
 	private Integer views = 0;
@@ -70,7 +70,7 @@ public class Comment {
 public class Author {
 	private String name;
 }
-</code>
+'''
 
 And execute code:
 <code>
