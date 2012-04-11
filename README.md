@@ -79,7 +79,7 @@ Post post = new Post(new Author("jason bourne"), "java-plist-serializer introduc
 post.addComment(new Comment("maciejwalkowiak", "first comment"));
 post.addComment(new Comment("john doe", "second comment"));
 
-String xml = plistSerializer.serialize(post);
+String xml = plistSerializer.toXmlPlist(post);
 ```
 
 <code>xml</code> will contain unformatted version of:
@@ -123,8 +123,10 @@ It is possible to use PlistSerializer together with Spring MVC. To return proper
 There are several ways to configure Spring MVC. The easiest to understand example of usage of <code>PlistView</code>:
 
 ```
-@RequestMapping(value = "/loadBlogPost", method = RequestMethod.GET)
-public ModelAndView loadBlogPost() {
+@Controller
+public class BlogController {
+	@RequestMapping(value = "/loadBlogPost", method = RequestMethod.GET)
+	public ModelAndView loadBlogPost() {
 		Post post = new Post(new Author("jason bourne"), "java-plist-serializer introduction", 9);
 		post.addComment(new Comment("maciejwalkowiak", "first comment"));
 		post.addComment(new Comment("john doe", "second comment"));
@@ -133,6 +135,7 @@ public ModelAndView loadBlogPost() {
 		model.addAttribute("RESULT", notification);
 
 		return new ModelAndView(new PlistView(), model);
+	}
 }
 ```
 

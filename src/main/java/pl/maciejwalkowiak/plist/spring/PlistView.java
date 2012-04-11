@@ -57,4 +57,8 @@ public class PlistView extends AbstractView {
 	public void setDisableCaching(boolean disableCaching) {
 		this.disableCaching = disableCaching;
 	}
+
+	public void setPlistSerializer(PlistSerializerImpl plistSerializer) {
+		this.plistSerializer = plistSerializer;
+	}
 }
