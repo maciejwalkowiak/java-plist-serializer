@@ -141,7 +141,7 @@ public class BlogController {
 
 ### Installation
 
-Current stable version is 1.0. Its not uploaded to any public Maven repository.
+Current stable version is 1.0.1. Its not uploaded to any public Maven repository.
 In order to use it please <a href="https://github.com/maciejwalkowiak/java-plist-serializer/zipball/v1.0">download source code</a> and run <code>mvn install</code>.
 
 
