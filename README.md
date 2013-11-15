@@ -1,5 +1,7 @@
 ## Java Objects to Property List Serializer
 
+[![Build Status](https://drone.io/github.com/maciejwalkowiak/java-plist-serializer/status.png)](https://drone.io/github.com/maciejwalkowiak/java-plist-serializer/latest)
+
 java-plist-serializer is a Java library that can be used to convert Java Objects into their Property List representation.
 
 Usage is very simple:
