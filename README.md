@@ -151,3 +151,7 @@ In order to use it please <a href="https://github.com/maciejwalkowiak/java-plist
 
 If you have cycle dependency in serialized object tree you will get StackOverFlowError unless you ignore reference by annotating with <code>@PlistIgnore</code>
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/maciejwalkowiak/java-plist-serializer/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
