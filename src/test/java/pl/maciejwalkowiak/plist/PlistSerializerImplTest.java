@@ -171,6 +171,19 @@ public class PlistSerializerImplTest {
 		//then
 		assertThat(xml).isEqualTo("<real>4.55</real>");
 	}
+	
+	@Test
+	public void testInheritedFieldsSerialization()
+	{
+		//given
+		FooChild object = new FooChild("test1", "test2");
+		
+		//when
+		String xml = plistSerializer.serialize(object);
+		
+		//then
+		assertThat(xml).isEqualTo("<dict><key>bar</key><string>test2</string><key>foo</key><string>test1</string></dict>");
+	}
 
 	@Test
 	public void testSupportedDataTypes() throws IllegalAccessException, InstantiationException {

@@ -34,6 +34,7 @@ import pl.maciejwalkowiak.plist.handler.PlistSerializationException;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -57,7 +58,7 @@ public class FieldSerializer {
 
 	public String serializeFields(Object objectToConvert) {
 		StringBuilder result = new StringBuilder();
-		List<Field> fields = Arrays.asList(objectToConvert.getClass().getDeclaredFields());
+		List<Field> fields = getAllFields(objectToConvert.getClass());
 
 		Collections.sort(fields, fieldComparator);
 		for (Field field : fields) {
@@ -130,4 +131,12 @@ public class FieldSerializer {
 
 		return XMLHelper.wrap(keyToWrap).with("key");
 	}
+
+    private static List<Field> getAllFields(Class<?> type) {
+        List<Field> fields = new ArrayList<Field>();
+        for (Class<?> c = type; c != null; c = c.getSuperclass()) {
+            fields.addAll(Arrays.asList(c.getDeclaredFields()));
+        }
+        return fields;
+    }
 }
