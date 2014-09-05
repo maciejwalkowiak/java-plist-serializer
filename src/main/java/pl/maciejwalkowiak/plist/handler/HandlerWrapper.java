@@ -45,6 +45,7 @@ public class HandlerWrapper {
 				new IntegerHandler(),
 				new DoubleHandler(),
 				new DateHandler(),
+				new DataHandler(),	
 				new CollectionHandler(plistSerializer)));
 	}
 
