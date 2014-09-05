@@ -25,6 +25,7 @@ package pl.maciejwalkowiak.plist;
 import org.junit.Test;
 import pl.maciejwalkowiak.plist.handler.Handler;
 import pl.maciejwalkowiak.plist.strategy.UppercaseNamingStrategy;
+import pl.maciejwalkowiak.plist.plistypes.PlistData;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -182,6 +183,19 @@ public class PlistSerializerImplTest {
 		
 		//then
 		assertThat(xml).isEqualTo("<dict><key>bar</key><string>test2</string><key>foo</key><string>test1</string></dict>");
+	}
+
+	@Test
+	public void testPlistDataSerializationHandler() {
+		//given
+		byte[] data = "test".getBytes();
+		PlistData object = new PlistData(data);
+
+		//when
+		String xml = plistSerializer.serialize(object);
+
+		//then
+		assertThat(xml).isEqualTo("<data>dGVzdA==</data>");
 	}
 
 	@Test
