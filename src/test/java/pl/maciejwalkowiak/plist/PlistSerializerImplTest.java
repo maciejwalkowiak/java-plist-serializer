@@ -173,8 +173,7 @@ public class PlistSerializerImplTest {
 	}
 	
 	@Test
-	public void testInheritedFieldsSerialization()
-	{
+	public void testInheritedFieldsSerialization() {
 		//given
 		FooChild object = new FooChild("test1", "test2");
 		
