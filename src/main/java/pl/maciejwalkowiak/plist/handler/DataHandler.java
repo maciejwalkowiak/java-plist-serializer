@@ -22,10 +22,9 @@
 
 package pl.maciejwalkowiak.plist.handler;
 
+import org.apache.commons.codec.binary.Base64;
 import pl.maciejwalkowiak.plist.XMLHelper;
 import pl.maciejwalkowiak.plist.plistypes.PlistData;
-
-import org.apache.axis.encoding.Base64;;
 
 /**
  * @author Victor Ronin
@@ -37,6 +36,6 @@ public class DataHandler implements Handler {
 	}
 
 	public String handle(Object object) {
-		return XMLHelper.wrap(Base64.encode(((PlistData)object).getData())).with("data");
+		return XMLHelper.wrap(new String(Base64.encodeBase64(((PlistData) object).getData()))).with("data");
 	}
 }
