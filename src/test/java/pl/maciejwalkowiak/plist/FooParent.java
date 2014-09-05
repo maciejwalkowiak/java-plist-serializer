@@ -20,18 +20,12 @@
  * THE SOFTWARE.
  */
 
-package pl.maciejwalkowiak.plist.handler;
+package pl.maciejwalkowiak.plist;
 
-/**
- * @author Maciej Walkowiak
- */
-public class DoubleHandler extends SimpleHandler {
-	@Override
-	protected String getWrap() {
-		return "real";
-	}
+public class FooParent {
+	private String foo;
 
-	public boolean supports(Object object) {
-		return object instanceof Float || object instanceof Double;
+	public FooParent(String foo) {
+		this.foo = foo;
 	}
 }

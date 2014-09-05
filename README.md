@@ -1,5 +1,7 @@
 ## Java Objects to Property List Serializer
 
+[![Build Status](https://drone.io/github.com/maciejwalkowiak/java-plist-serializer/status.png)](https://drone.io/github.com/maciejwalkowiak/java-plist-serializer/latest)
+
 java-plist-serializer is a Java library that can be used to convert Java Objects into their Property List representation.
 
 Usage is very simple:
@@ -141,11 +143,15 @@ public class BlogController {
 
 ### Installation
 
-Current stable version is 1.0. Its not uploaded to any public Maven repository.
+Current stable version is 1.0.1. Its not uploaded to any public Maven repository.
 In order to use it please <a href="https://github.com/maciejwalkowiak/java-plist-serializer/zipball/v1.0">download source code</a> and run <code>mvn install</code>.
 
 
 ### Known issues
 
 If you have cycle dependency in serialized object tree you will get StackOverFlowError unless you ignore reference by annotating with <code>@PlistIgnore</code>
+
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/maciejwalkowiak/java-plist-serializer/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
