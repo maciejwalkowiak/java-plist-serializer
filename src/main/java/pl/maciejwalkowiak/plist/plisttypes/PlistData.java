@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 
-package pl.maciejwalkowiak.plist.plistypes;
+package pl.maciejwalkowiak.plist.plisttypes;
 
 /**
  * @author Victor Ronin
