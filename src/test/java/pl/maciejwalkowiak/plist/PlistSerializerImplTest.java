@@ -25,7 +25,7 @@ package pl.maciejwalkowiak.plist;
 import org.junit.Test;
 import pl.maciejwalkowiak.plist.handler.Handler;
 import pl.maciejwalkowiak.plist.strategy.UppercaseNamingStrategy;
-import pl.maciejwalkowiak.plist.plistypes.PlistData;
+import pl.maciejwalkowiak.plist.plisttypes.PlistData;
 
 import java.math.BigDecimal;
 import java.util.*;
