@@ -23,27 +23,19 @@
 package pl.maciejwalkowiak.plist.handler;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import pl.maciejwalkowiak.plist.XMLHelper;
 
 /**
  * @author Maciej Walkowiak
+ * @author Nadeem Khan
  */
-public class StringHandler extends SimpleHandler {
+public class StringHandler implements Handler {
 	public boolean supports(Object object) {
 		return object instanceof String;
 	}
 
-    @Override
-    public String handle(Object object) {
-        if(supports(object)) {
-            String escaped = StringEscapeUtils.escapeXml((String)object);
-            return super.handle(escaped);
-        } else {
-            throw new ObjectNotSupportedException("Handler does not support: " + object);
-        }
-    }
-
 	@Override
-	protected String getWrap() {
-		return "string";
+	public String handle(Object object) {
+		return XMLHelper.wrap(StringEscapeUtils.escapeXml((String) object)).with("string");
 	}
 }
