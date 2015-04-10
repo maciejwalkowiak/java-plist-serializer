@@ -22,16 +22,20 @@
 
 package pl.maciejwalkowiak.plist.handler;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import pl.maciejwalkowiak.plist.XMLHelper;
+
 /**
  * @author Maciej Walkowiak
+ * @author Nadeem Khan
  */
-public class StringHandler extends SimpleHandler {
+public class StringHandler implements Handler {
 	public boolean supports(Object object) {
 		return object instanceof String;
 	}
 
 	@Override
-	protected String getWrap() {
-		return "string";
+	public String handle(Object object) {
+		return XMLHelper.wrap(StringEscapeUtils.escapeXml((String) object)).with("string");
 	}
 }
