@@ -24,7 +24,7 @@ package pl.maciejwalkowiak.plist.handler;
 
 import org.apache.commons.codec.binary.Base64;
 import pl.maciejwalkowiak.plist.XMLHelper;
-import pl.maciejwalkowiak.plist.plistypes.PlistData;
+import pl.maciejwalkowiak.plist.plisttypes.PlistData;
 
 /**
  * @author Victor Ronin

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Maciej Walkowiak
+ * Copyright (c) 2014 Maciej Walkowiak
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,19 +20,22 @@
  * THE SOFTWARE.
  */
 
-package pl.maciejwalkowiak.plist.plisttypes;
+package pl.maciejwalkowiak.plist.spring;
 
-/**
- * @author Victor Ronin
- */
-public class PlistData {
-	private byte[] data;
-	
-	public PlistData(byte[] data) {
-		this.data = data;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import pl.maciejwalkowiak.plist.Author;
+
+@Controller
+public class SpringTestController {
+
+	@ResponseBody
+	@RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/x-plist")
+	public Author testMethod() {
+
+		return new Author("Franz Kafka");
 	}
-	
-	public byte[] getData() {
-		return data;
-	}
+
 }
