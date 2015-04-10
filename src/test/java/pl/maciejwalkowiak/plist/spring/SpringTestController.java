@@ -31,11 +31,11 @@ import pl.maciejwalkowiak.plist.Author;
 @Controller
 public class SpringTestController {
 
-    @ResponseBody
-    @RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/x-plist")
-    public Author testMethod() {
+	@ResponseBody
+	@RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/x-plist")
+	public Author testMethod() {
 
-        return new Author("Franz Kafka");
-    }
+		return new Author("Franz Kafka");
+	}
 
 }

@@ -38,59 +38,59 @@ import java.nio.charset.Charset;
 
 public class PlistHttpMessageConverter extends AbstractHttpMessageConverter<Object> {
 
-    public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
+	public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
-    private PlistSerializer plistSerializer;
+	private PlistSerializer plistSerializer;
 
-    private boolean addHeader;
+	private boolean addHeader;
 
-    /**
-     * Construct a new {@code PlistHttpMessageConverter}.
-     */
-    public PlistHttpMessageConverter(boolean addHeader) {
-        super(new MediaType("application", "x-plist", DEFAULT_CHARSET),
-                new MediaType("application", "x-apple-aspen-mdm-checkin", DEFAULT_CHARSET));
+	/**
+	 * Construct a new {@code PlistHttpMessageConverter}.
+	 */
+	public PlistHttpMessageConverter(boolean addHeader) {
+		super(new MediaType("application", "x-plist", DEFAULT_CHARSET),
+				new MediaType("application", "x-apple-aspen-mdm-checkin", DEFAULT_CHARSET));
 
-        this.addHeader = addHeader;
-        plistSerializer = new PlistSerializerImpl();
-    }
+		this.addHeader = addHeader;
+		plistSerializer = new PlistSerializerImpl();
+	}
 
-    @Override
-    protected boolean supports(Class<?> clazz) {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	protected boolean supports(Class<?> clazz) {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public boolean canRead(Class<?> clazz, MediaType mediaType) {
-        return false;
-    }
+	@Override
+	public boolean canRead(Class<?> clazz, MediaType mediaType) {
+		return false;
+	}
 
-    @Override
-    public boolean canWrite(Class<?> clazz, MediaType mediaType) {
-        return canWrite(mediaType);
-    }
+	@Override
+	public boolean canWrite(Class<?> clazz, MediaType mediaType) {
+		return canWrite(mediaType);
+	}
 
-    @Override
-    protected Object readInternal(Class<?> aClass, HttpInputMessage httpInputMessage) throws IOException, HttpMessageNotReadableException {
-        return null;
-    }
+	@Override
+	protected Object readInternal(Class<?> aClass, HttpInputMessage httpInputMessage) throws IOException, HttpMessageNotReadableException {
+		return null;
+	}
 
-    private Charset getCharset(HttpHeaders headers) {
-        if (headers == null || headers.getContentType() == null || headers.getContentType().getCharSet() == null) {
-            return DEFAULT_CHARSET;
-        }
-        return headers.getContentType().getCharSet();
-    }
+	private Charset getCharset(HttpHeaders headers) {
+		if (headers == null || headers.getContentType() == null || headers.getContentType().getCharSet() == null) {
+			return DEFAULT_CHARSET;
+		}
+		return headers.getContentType().getCharSet();
+	}
 
-    @Override
-    protected void writeInternal(Object o, HttpOutputMessage httpOutputMessage) throws IOException, HttpMessageNotWritableException {
+	@Override
+	protected void writeInternal(Object o, HttpOutputMessage httpOutputMessage) throws IOException, HttpMessageNotWritableException {
 
-        Charset charset = getCharset(httpOutputMessage.getHeaders());
-        OutputStreamWriter writer = new OutputStreamWriter(httpOutputMessage.getBody(), charset);
+		Charset charset = getCharset(httpOutputMessage.getHeaders());
+		OutputStreamWriter writer = new OutputStreamWriter(httpOutputMessage.getBody(), charset);
 
-        String result = addHeader ? plistSerializer.toXmlPlist(o) : plistSerializer.serialize(o);
+		String result = addHeader ? plistSerializer.toXmlPlist(o) : plistSerializer.serialize(o);
 
-        writer.write(result);
-        writer.close();
-    }
+		writer.write(result);
+		writer.close();
+	}
 }

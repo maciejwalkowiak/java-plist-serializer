@@ -51,38 +51,38 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration
 public class PlistHttpMessageConverterTest {
 
-    @Configuration
-    @ComponentScan(basePackageClasses = SpringTestController.class)
-    @EnableWebMvc
-    static class Config extends WebMvcConfigurerAdapter {
+	@Configuration
+	@ComponentScan(basePackageClasses = SpringTestController.class)
+	@EnableWebMvc
+	static class Config extends WebMvcConfigurerAdapter {
 
-        @Override
-        public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-            converters.add(new PlistHttpMessageConverter(false));
-        }
+		@Override
+		public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+			converters.add(new PlistHttpMessageConverter(false));
+		}
 
-    }
+	}
 
-    @Autowired
-    private WebApplicationContext wac;
+	@Autowired
+	private WebApplicationContext wac;
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @Before
-    public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-    }
+	@Before
+	public void setup() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+	}
 
-    @Test
-    public void testPlistHttpMessageConverter() throws Exception {
-        MvcResult result = this.mockMvc.perform(get("/test").accept(MediaType.parseMediaType("application/x-plist")))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/x-plist"))
-                .andReturn();
+	@Test
+	public void testPlistHttpMessageConverter() throws Exception {
+		MvcResult result = this.mockMvc.perform(get("/test").accept(MediaType.parseMediaType("application/x-plist")))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType("application/x-plist"))
+				.andReturn();
 
-        String xml = result.getResponse().getContentAsString();
+		String xml = result.getResponse().getContentAsString();
 
-        assertThat(xml).isEqualTo("<dict><key>name</key><string>Franz Kafka</string></dict>");
-    }
+		assertThat(xml).isEqualTo("<dict><key>name</key><string>Franz Kafka</string></dict>");
+	}
 
 }
