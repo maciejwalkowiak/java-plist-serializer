@@ -22,6 +22,8 @@
 
 package pl.maciejwalkowiak.plist.handler;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 /**
  * @author Maciej Walkowiak
  */
@@ -29,6 +31,16 @@ public class StringHandler extends SimpleHandler {
 	public boolean supports(Object object) {
 		return object instanceof String;
 	}
+
+    @Override
+    public String handle(Object object) {
+        if(supports(object)) {
+            String escaped = StringEscapeUtils.escapeXml((String)object);
+            return super.handle(escaped);
+        } else {
+            throw new ObjectNotSupportedException("Handler does not support: " + object);
+        }
+    }
 
 	@Override
 	protected String getWrap() {
