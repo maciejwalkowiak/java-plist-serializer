@@ -25,6 +25,8 @@ package pl.maciejwalkowiak.plist.handler;
 import pl.maciejwalkowiak.plist.PlistSerializerImpl;
 import pl.maciejwalkowiak.plist.XMLHelper;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -32,31 +34,41 @@ import java.util.Collection;
  */
 public class CollectionHandler extends AbstractHandler {
 
-	public CollectionHandler(PlistSerializerImpl plistSerializer) {
-		super(plistSerializer);
-	}
+    public CollectionHandler(PlistSerializerImpl plistSerializer) {
+        super(plistSerializer);
+    }
 
-	public boolean supports(Object object) {
-		return object instanceof Collection || isArray(object);
-	}
+    public boolean supports(Object object) {
+        return object instanceof Collection || isArray(object);
+    }
 
-	public String doHandle(Object object) {
-		StringBuilder result = new StringBuilder();
+    public String doHandle(Object object) {
+        StringBuilder result = new StringBuilder();
 
-		Collection col = (Collection) object;
+        Collection col;
+        if ((isArray(object))) {
+            int len = Array.getLength(object);
+            col = new ArrayList(len);
+            for (int i = 0; i < len; i++) {
+                col.add(Array.get(object, i));
+            }
+        }
+        else {
+            col = (Collection) object;
+        }
 
-		for (Object o: col) {
-			result.append(plistSerializer.serialize(o));
-		}
+        for (Object o: col) {
+            result.append(plistSerializer.serialize(o));
+        }
 
-		return XMLHelper.wrap(result).with("array");
-	}
+        return XMLHelper.wrap(result).with("array");
+    }
 
-	private boolean isArray(final Object obj) {
-		return obj instanceof Object[] || obj instanceof boolean[] ||
-				obj instanceof byte[] || obj instanceof short[] ||
-				obj instanceof char[] || obj instanceof int[] ||
-				obj instanceof long[] || obj instanceof float[] ||
-				obj instanceof double[];
-	}
+    private boolean isArray(final Object obj) {
+        return obj instanceof Object[] || obj instanceof boolean[] ||
+            obj instanceof byte[] || obj instanceof short[] ||
+            obj instanceof char[] || obj instanceof int[] ||
+            obj instanceof long[] || obj instanceof float[] ||
+            obj instanceof double[];
+    }
 }

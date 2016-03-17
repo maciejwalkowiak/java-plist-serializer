@@ -10,6 +10,51 @@
 	<name>java-plist-serializer</name>
 	<url>https://github.com/maciejwalkowiak/java-plist-serializer</url>
 
+    <!-- vvv ANG: Added DiViBib Repository for deployment vvv -->
+    <scm>
+        <connection>scm:svn:http://192.168.200.106/svn/eink-excelsis-2015/libraries/java-plist-serializer/</connection>
+        <developerConnection>scm:svn:http://192.168.200.106/svn/eink-excelsis-2015/libraries/java-plist-serializer/</developerConnection>
+        <tag>HEAD</tag>
+        <url>http://192.168.200.106/svn/eink-excelsis-2015/libraries/java-plist-serializer/</url>
+    </scm>
+
+
+    <repositories>
+        <repository>
+            <id>divibib-releases</id>
+            <url>http://192.168.200.106:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>divibib-snapshots</id>
+            <url>http://192.168.200.106:8081/nexus/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>divibib-releases</id>
+            <url>http://192.168.200.106:8081/nexus/content/repositories/releases</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>divibib-releases</id>
+            <name>DiViBib Repository</name>
+            <url>http://192.168.200.106:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>divibib-snapshots</id>
+            <name>DiViBib Repository</name>
+            <url>http://192.168.200.106:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <!-- ^^^ ANG: Added DiViBib Repository for deployment ^^^ -->
+    
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.1.6.RELEASE</spring.version>
