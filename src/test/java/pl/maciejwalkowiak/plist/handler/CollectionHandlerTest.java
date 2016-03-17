@@ -22,6 +22,7 @@
 
 package pl.maciejwalkowiak.plist.handler;
 
+import com.sun.deploy.security.MozillaMyKeyStore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -39,79 +40,73 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CollectionHandlerTest
-{
-    @InjectMocks
-    private CollectionHandler collectionHandler;
+public class CollectionHandlerTest {
+	@InjectMocks
+	private CollectionHandler collectionHandler;
 
-    @Mock
-    private PlistSerializerImpl plistSerializer;
+	@Mock
+	private PlistSerializerImpl plistSerializer;
 
-    @Test
-    public void testSupportsArray() throws Exception
-    {
-        //given
-        int[] array = new int[] { 1, 2, 3 };
+	@Test
+	public void testSupportsArray() throws Exception {
+		//given
+		int[] array = new int[] { 1, 2, 3 };
 
-        //when
-        boolean supports = collectionHandler.supports(array);
+		//when
+		boolean supports = collectionHandler.supports(array);
 
-        //then
-        assertThat(supports).isTrue();
-    }
+		//then
+		assertThat(supports).isTrue();
+	}
 
-    @Test
-    public void testSupportsList() throws Exception
-    {
-        //given
-        List<Integer> list = Arrays.asList(1, 2, 3);
+	@Test
+	public void testSupportsList() throws Exception {
+		//given
+		List<Integer> list = Arrays.asList(1, 2, 3);
 
-        //when
-        boolean supports = collectionHandler.supports(list);
+		//when
+		boolean supports = collectionHandler.supports(list);
 
-        //then
-        assertThat(supports).isTrue();
-    }
+		//then
+		assertThat(supports).isTrue();
+	}
 
-    @Test
-    public void testIntConversion()
-    {
-        //given
-        List<Integer> list = Arrays.asList(1, 2, 3);
+	@Test
+	public void testIntConversion() {
+		//given
+		List<Integer> list = Arrays.asList(1, 2, 3);
 
-        given(plistSerializer.serialize(anyInt())).willReturn("<integer>1</integer>");
+		given(plistSerializer.serialize(anyInt())).willReturn("<integer>1</integer>");
 
-        //when
-        String result = collectionHandler.handle(list);
+		//when
+		String result = collectionHandler.handle(list);
 
-        //then
+		//then
 
-        assertThat(result).isEqualTo("<array><integer>1</integer><integer>1</integer><integer>1</integer></array>");
+		assertThat(result).isEqualTo("<array><integer>1</integer><integer>1</integer><integer>1</integer></array>");
 
-        for (Integer i : list)
-        {
-            Mockito.verify(plistSerializer).serialize(eq(i));
-        }
-    }
+		for (Integer i : list) {
+			Mockito.verify(plistSerializer).serialize(eq(i));
+		}
+	}
 
-    @Test
-    public void testNativeIntConversion()
-    {
-        //given
-        int[] list = new int[] { 1, 2, 3 };
+	@Test
+	public void testNativeIntConversion() {
+		//given
+		int[] list = new int[] { 1, 2, 3 };
 
-        given(plistSerializer.serialize(anyInt())).willReturn("<integer>1</integer>");
+		given(plistSerializer.serialize(anyInt())).willReturn("<integer>1</integer>");
 
-        //when
-        String result = collectionHandler.handle(list);
+		//when
+		String result = collectionHandler.handle(list);
 
-        //then
+		//then
 
-        assertThat(result).isEqualTo("<array><integer>1</integer><integer>1</integer><integer>1</integer></array>");
+		assertThat(result).isEqualTo("<array><integer>1</integer><integer>1</integer><integer>1</integer></array>");
 
-        for (Integer i : list)
-        {
-            Mockito.verify(plistSerializer).serialize(eq(i));
-        }
-    }
+		for (Integer i : list) {
+			Mockito.verify(plistSerializer).serialize(eq(i));
+		}
+
+	}
 }
