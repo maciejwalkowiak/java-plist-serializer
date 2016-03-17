@@ -9,3 +9,6 @@
  
 # Maven
 target/
+
+#pom to deploy internally
+pom.xml.own
