@@ -22,7 +22,6 @@
 
 package pl.maciejwalkowiak.plist.handler;
 
-import com.sun.deploy.security.MozillaMyKeyStore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
